@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/NasirUllahAman/GOL/route"
+	"github.com/NasirUllahAman/echoCalculator/route"
 
 	"github.com/labstack/echo/v4"
 )

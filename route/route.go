@@ -1,7 +1,7 @@
 package route
 
 import (
-	"github.com/NasirUllahAman/GOL/controller"
+	"github.com/NasirUllahAman/echoCalculator/controller"
 	"github.com/labstack/echo/v4"
 )
 
