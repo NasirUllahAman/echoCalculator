@@ -1,0 +1,1 @@
+CREATE USER 'root'@'localhost' IDENTIFIED WITH authentication_plugin BY 'Nasir@1234567';
