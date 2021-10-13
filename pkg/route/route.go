@@ -16,4 +16,6 @@ func Route(e *echo.Echo) {
 	e.POST("/mod", controller.Modlus, middleware.AuthMiddleWare)
 	e.POST("/sqrt", controller.Sqroot, middleware.AuthMiddleWare)
 	e.POST("/Squ", controller.Square, middleware.AuthMiddleWare)
+	e.GET("/calculator/getAllRecords", controller.GetAllRecords, middleware.AuthMiddleWare)
+	e.GET("/calculator/getRecord/:id", controller.GetRecord, middleware.AuthMiddleWare)
 }

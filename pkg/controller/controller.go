@@ -16,6 +16,41 @@ type Calculator struct {
 type Response struct {
 	Result float64 `json:"result"`
 }
+type fetchedData struct {
+	Id      int     `json:"id"`
+	Num1    float64 `json:"number1"`
+	Num2    float64 `json:"number2"`
+	Opr     string  `json:"operation"`
+	Rslt    float64 `json:"result"`
+	Created string  `json:"created at"`
+}
+
+func GetAllRecords(c echo.Context) error {
+	var number1 float64
+	var ID int
+	var number2 float64
+	var Operation string
+	var Result float64
+	var createdAt string
+	respData := make([]fetchedData, 0)
+	db := database.Conc()
+	rows, err := db.Query("SELECT * FROM calcu")
+	if err != nil {
+		return err
+	}
+	defer rows.Close()
+	for rows.Next() {
+		if err := rows.Scan(&ID, &number1, &number2, &Operation, &Result, &createdAt); err != nil {
+			panic(err)
+		}
+		record := fetchedData{Id: ID, Num1: number1, Num2: number2, Opr: Operation, Rslt: Result, Created: createdAt}
+		respData = append(respData, record)
+	}
+	if err := rows.Err(); err != nil {
+		panic(err)
+	}
+	return c.JSON(http.StatusOK, respData)
+}
 
 func Addition(c echo.Context) error {
 
@@ -53,6 +88,25 @@ func Addition(c echo.Context) error {
 
 	return c.JSON(http.StatusOK, res)
 
+}
+
+func GetRecord(c echo.Context) error {
+	var ID int
+	var number1 float64
+	var number2 float64
+	var Operation string
+	var Result float64
+	var createdAt string
+	id := c.Param("id")
+	fmt.Println(id)
+	db := database.Conc()
+	Err := db.QueryRow("SELECT * FROM calcu WHERE ID = ?", id).Scan(&ID, &number1, &number2, &Operation, &Result, &createdAt)
+	if Err != nil {
+		fmt.Println(Err.Error())
+	}
+	response := fetchedData{Id: ID, Num1: number1, Num2: number2, Opr: Operation, Rslt: Result, Created: createdAt}
+	fmt.Println(response)
+	return c.JSON(http.StatusOK, response)
 }
 
 func Subtraction(c echo.Context) error {
