@@ -25,6 +25,8 @@ type fetchedData struct {
 	Created string  `json:"created at"`
 }
 
+//get_All_Record Funtion
+
 func GetAllRecords(c echo.Context) error {
 	var number1 float64
 	var ID int
@@ -52,6 +54,7 @@ func GetAllRecords(c echo.Context) error {
 	return c.JSON(http.StatusOK, respData)
 }
 
+//addition funtion
 func Addition(c echo.Context) error {
 
 	sum := new(Calculator)
@@ -90,6 +93,8 @@ func Addition(c echo.Context) error {
 
 }
 
+//getrecord funtion
+
 func GetRecord(c echo.Context) error {
 	var ID int
 	var number1 float64
@@ -109,6 +114,39 @@ func GetRecord(c echo.Context) error {
 	return c.JSON(http.StatusOK, response)
 }
 
+///delete record
+
+func DeleteRecord(c echo.Context) error {
+	id := c.Param("id")
+	fmt.Println(id)
+	db := database.Conc()
+	_, err := db.Query("DELETE FROM calcu where id=?", id)
+	if err != nil {
+		fmt.Println(err.Error())
+	}
+	return c.JSON(http.StatusOK, "Success")
+}
+
+//update function
+
+/*func UpdateRecord(c echo.Context) error {
+	id := c.Param("id")
+	fmt.Println(id)
+	db := database.Conc()
+	insForm,err := db.Query("UPDATE calcu SET number1=?, number2=?, operation=?, result=? WHERE id=?")
+	if Err != nil {
+		panic(Err.Error())
+	}
+	insForm.Exec(name, city, id)
+        log.Println("UPDATE: number1: " + number1 + "number2: " + number2 +" operation" + operation + "result" + result)
+    	fmt.Println(insForm)
+	}
+
+	return c.JSON(http.StatusOK, insForm)
+}
+*/
+
+//Subtraction  Funtion
 func Subtraction(c echo.Context) error {
 	subtract := new(Calculator)
 	if err := c.Bind(subtract); err != nil {
@@ -144,6 +182,8 @@ func Subtraction(c echo.Context) error {
 	return c.JSON(http.StatusOK, res)
 
 }
+
+//muplication Funtion
 func Multiply(c echo.Context) error {
 	mul := new(Calculator)
 	if err := c.Bind(mul); err != nil {
@@ -179,6 +219,8 @@ func Multiply(c echo.Context) error {
 	return c.JSON(http.StatusOK, res)
 
 }
+
+//division Funtion
 func Division(c echo.Context) error {
 	div := new(Calculator)
 	if err := c.Bind(div); err != nil {
@@ -215,6 +257,7 @@ func Division(c echo.Context) error {
 
 }
 
+//modulus Funtion
 func Modlus(c echo.Context) error {
 	mod := new(Calculator)
 	if err := c.Bind(mod); err != nil {
@@ -250,6 +293,8 @@ func Modlus(c echo.Context) error {
 	return c.JSON(http.StatusOK, res)
 
 }
+
+//square funtion
 func Square(c echo.Context) error {
 	sq := new(Calculator)
 	if err := c.Bind(sq); err != nil {
@@ -284,6 +329,8 @@ func Square(c echo.Context) error {
 
 	return c.JSON(http.StatusOK, res)
 }
+
+//ssquare root Funtion
 func Sqroot(c echo.Context) error {
 	sqt := new(Calculator)
 	if err := c.Bind(sqt); err != nil {
