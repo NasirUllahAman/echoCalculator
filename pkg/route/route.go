@@ -3,6 +3,7 @@ package route
 import (
 	"github.com/NasirUllahAman/echoCalculator/pkg/controller"
 	"github.com/NasirUllahAman/echoCalculator/pkg/middleware"
+	echoSwagger "github.com/swaggo/echo-swagger"
 
 	"github.com/labstack/echo/v4"
 )
@@ -19,4 +20,5 @@ func Route(e *echo.Echo) {
 	e.GET("/getAllRecords", controller.GetAllRecords, middleware.AuthMiddleWare)
 	e.GET("/getRecord/:id", controller.GetRecord, middleware.AuthMiddleWare)
 	e.DELETE("/deleteRecord/:id", controller.DeleteRecord, middleware.AuthMiddleWare)
+	e.GET("/swagger/*", echoSwagger.WrapHandler)
 }
