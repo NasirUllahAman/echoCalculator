@@ -64,31 +64,25 @@ func Addition(c echo.Context) error {
 	total := sum.Num1 + sum.Num2
 	db := database.Conc()
 	defer db.Close()
-
 	sql := "INSERT INTO calcu(number1, number2, operation, result) VALUES(?, ?, ?, ?)"
 	stmt, err := db.Prepare(sql)
 	if err != nil {
 		fmt.Print(err.Error())
 	}
-
 	defer stmt.Close()
 	result, err2 := stmt.Exec(sum.Num1, sum.Num2, "+", total)
-
 	// Exit if we get an error
 	if err2 != nil {
 		panic(err2)
 	}
 	fmt.Println(result.LastInsertId())
-
 	if err != nil {
 		fmt.Print(err.Error())
 	}
-
 	res := Response{
 		total,
 	}
 	fmt.Println(res)
-
 	return c.JSON(http.StatusOK, res)
 
 }

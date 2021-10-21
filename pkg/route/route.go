@@ -11,14 +11,14 @@ import (
 func Route(e *echo.Echo) {
 
 	e.POST("/add", controller.Addition, middleware.AuthMiddleWare)
-	e.POST("/Subtraction", controller.Subtraction, middleware.AuthMiddleWare)
-	e.POST("/Multiply", controller.Multiply, middleware.AuthMiddleWare)
-	e.POST("/Division", controller.Division, middleware.AuthMiddleWare)
+	e.POST("/subtraction", controller.Subtraction, middleware.AuthMiddleWare)
+	e.POST("/multiply", controller.Multiply, middleware.AuthMiddleWare)
+	e.POST("/division", controller.Division, middleware.AuthMiddleWare)
 	e.POST("/mod", controller.Modlus, middleware.AuthMiddleWare)
 	e.POST("/sqrt", controller.Sqroot, middleware.AuthMiddleWare)
-	e.POST("/Squ", controller.Square, middleware.AuthMiddleWare)
-	e.GET("/getAllRecords", controller.GetAllRecords, middleware.AuthMiddleWare)
-	e.GET("/getRecord/:id", controller.GetRecord, middleware.AuthMiddleWare)
-	e.DELETE("/deleteRecord/:id", controller.DeleteRecord, middleware.AuthMiddleWare)
+	e.POST("/square", controller.Square, middleware.AuthMiddleWare)
+	e.GET("/history", controller.GetAllRecords, middleware.AdminMiddleWare)
+	e.GET("/history/:id", controller.GetRecord, middleware.AdminMiddleWare)
+	e.DELETE("/history/:id", controller.DeleteRecord, middleware.AdminMiddleWare)
 	e.GET("/swagger/*", echoSwagger.WrapHandler)
 }

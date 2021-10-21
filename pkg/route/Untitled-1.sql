@@ -1,4 +1,4 @@
-
+                                                                 
 CREATE USER 'nsair'@'localhost' IDENTIFIED BY 'Nasir@123';
 
 GRANT ALL ON my_db.* TO 'nasir'@'localhost';
@@ -18,4 +18,7 @@ UPDATE mysql.user SET Password = PASSWORD('HAMZAANIS@1213ad1231') WHERE User = '
 
 
 UPDATE mysql.user SET authentication_string=PASSWORD('YOURNEWPASSWORD'), plugin='mysql_native_password' WHERE User='root' AND Host='localhost';
+
+
+
 

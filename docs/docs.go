@@ -22,7 +22,325 @@ var doc = `{
     },
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
-    "paths": {}
+	securityDefinitions:{
+		Bearer:{     
+		  type: apiKey,
+		  in: header,
+		  name: Authorization,
+			},
+	},
+    "paths": {
+		"/add": {
+			post :{
+				security: [{
+                    Bearer: []
+                }],
+				summary: Adding two numbers.,
+				description: They get two number from user and then add each other.,
+				produces: [
+					application/json
+				],
+				parameters: [
+					{
+						in: body,
+						name: Calculator,
+						description: Give any number,
+						properties: {
+							number1: {
+								type: integer,
+								format: json
+							},
+							number2: {
+								type: integer,
+								format: json
+							}
+						}
+					}
+				],
+				responses: {
+					200: {
+						description: Status, OK
+					}
+				}
+			}
+		},
+			"/subtraction": {
+			post: {
+				security: [{
+					Bearer: []
+				}],
+			summary: Subtract two numbers,		
+			  description: Calculate the value of the subtraction of the two entered numbers,
+			  produces: [
+				application/json
+			  ],
+			  "parameters":[
+				{
+				  "in": "body",
+				  "name": "Calculator",
+				  "description": "Enter value of number1 & number2",
+				  "properties":{
+				  "number1":{
+					  "type":"integer",
+					  "format":"json"
+				  },
+	
+					"number2":{
+						"type":"integer",
+						"format":"json"
+					},
+					},
+				   
+				  },
+				  ],
+			  "responses": {
+				"200": {
+				  "description": "Subtraction of numbers is successful"
+				},
+			},
+		},
+		},
+
+		"/multiply": {
+			post: {
+				security: [{
+					Bearer: []
+				}],
+			summary: Subtract two numbers,		
+			  description: Calculate the value of the multiply of the two entered numbers,
+			  produces: [
+				application/json
+			  ],
+			  "parameters":[
+				{
+				  "in": "body",
+				  "name": "Calculator",
+				  "description": "Enter value of number1 & number2",
+				  "properties":{
+				  "number1":{
+					  "type":"integer",
+					  "format":"json"
+				  },
+	
+					"number2":{
+						"type":"integer",
+						"format":"json"
+					},
+					},
+				   
+				  },
+				  ],
+			  "responses": {
+				"200": {
+				  "description": "Subtraction of numbers is successful"
+				},
+			},
+		},
+		},
+
+		"/division": {
+			post: {
+				security: [{
+					Bearer: []
+				}],
+			summary: division two numbers,		
+			  description: Calculate the value of the division of the two entered numbers,
+			  produces: [
+				application/json
+			  ],
+			  "parameters":[
+				{
+				  "in": "body",
+				  "name": "Calculator",
+				  "description": "Enter value of number1 & number2",
+				  "properties":{
+				  "number1":{
+					  "type":"integer",
+					  "format":"json"
+				  },
+	
+					"number2":{
+						"type":"integer",
+						"format":"json"
+					},
+					},
+				   
+				  }
+				  ],
+			  "responses": {
+				"200": {
+				  "description": "Division of numbers is successful"
+				},
+			},
+		},
+		},
+
+		"/mod": {
+			post: {
+				security: [{
+					Bearer: []
+				}],
+			summary: Modulus of two numbers,		
+			  description: Calculate the value of the modulus of the two entered numbers,
+			  produces: [
+				application/json
+			  ],
+			  "parameters":[
+				{
+				  "in": "body",
+				  "name": "Calculator",
+				  "description": "Enter value of number1 & number2",
+				  "properties":{
+				  "number1":{
+					  "type":"integer",
+					  "format":"json"
+				  },
+	
+					"number2":{
+						"type":"integer",
+						"format":"json"
+					},
+					},
+				   
+				  }
+				  ],
+			  "responses": {
+				"200": {
+				  "description": "Modulus of numbers is successful"
+				},
+			},
+		},
+		},
+		"/square": {
+			post: {
+				security: [{
+					Bearer: []
+				}],
+			summary: Square of a number,		
+			  description: Calculate the value of the square of a number,
+			  produces: [
+				application/json
+			  ],
+			  "parameters":[
+				{
+				  "in": "body",
+				  "name": "Calculator",
+				  "description": "Enter value of number1",
+				  "properties":{
+				  "number1":{
+					  "type":"integer",
+					  "format":"json"
+				  },
+					},
+				   
+				  }
+				  ],
+			  "responses": {
+				"200": {
+				  "description": "Square of a number is successful"
+				},
+			},
+		},
+		},
+		"/sqrt": {
+			post: {
+				security: [{
+					Bearer: []
+				}],
+			summary: Suqare root of a number,		
+			  description: Calculate the value of the square root of the entered numbers,
+			  produces: [
+				application/json
+			  ],
+			  "parameters":[
+				{
+				  "in": "body",
+				  "name": "Calculator",
+				  "description": "Enter value of number1",
+				  "properties":{
+				  "number1":{
+					  "type":"integer",
+					  "format":"json"
+				  },
+	
+					},
+				   
+				  }
+				  ],
+			  "responses": {
+				"200": {
+				  "description": "Square root of number is successful"
+				},
+			},
+		},
+		},
+
+		"/history/{id}": {
+			get: {
+				
+					security: [{
+						Bearer: []
+					}],
+			 
+				
+			summary: Show record by user id,		
+			"parameters": [
+				{
+					"name": "id",
+					"in": "path",
+					"description": "ID for the specific log",
+					"required": true,
+					"type": "integer",
+					"format": "int64"
+				},
+			],
+			
+			"responses": {
+				"200": {
+				  "description": "Record has been displayed"
+				}
+			}
+		}
+		},
+		"/history": {
+			get: {
+				security: [{
+					Bearer: []
+				}],
+			summary: Show all records,		
+			"responses": {
+				"200": {
+				  "description": "Records have been displayed"
+				},
+			},
+		},
+		},
+
+		"/deleteRecord/{id}":{
+			delete:{
+				security: [{
+					Bearer: []
+				}],
+				summary: Show record by user id,		
+			"parameters": [
+				{
+					"name": "id",
+					"in": "path",
+					"description": "ID for the specific log",
+					"required": true,
+					"type": "integer",
+					"format": "int64"
+				},
+			],
+				responses:{
+"204":{
+description: Deleted,
+},	
+},
+},
+},
+		
+	}
 }`
 
 type swaggerInfo struct {
@@ -36,12 +354,12 @@ type swaggerInfo struct {
 
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = swaggerInfo{
-	Version:     "",
-	Host:        "",
-	BasePath:    "",
+	Version:     "2.0",
+	Host:        "localhost:8000",
+	BasePath:    "/",
 	Schemes:     []string{},
-	Title:       "",
-	Description: "",
+	Title:       "Calculator",
+	Description: "different function perform",
 }
 
 type s struct{}
